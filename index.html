@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> - </title>
+  <meta name="theme-color" content="#17072f">
+  <link rel="stylesheet" href="css/ress.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="pic/logo.svg" type="image/svg+xml">
+</head>
+
+<body>
+  <div id="bg">
+    <img src="pic/bg.svg" alt="background" />
+    <div>
+      <p id="date"></p>
+      <p id="time"></p>
+    </div>
+  </div>
+</body>
+<script type="text/javascript">
+
+  document.querySelector("#date").innerHTML = date();
+  document.querySelector("#time").innerHTML = time();
+
+  let timerID = setInterval('clock()', 1000);
+
+  function clock() {
+    document.getElementById("time").innerHTML = time();
+  }
+
+  function date() {
+    let now = new Date();
+    let year = now.getFullYear();
+    let mon = now.getMonth() + 1;
+    let day = now.getDate();
+
+    let s = " " + mon + "/" + day + ", " + year + " ";
+    return s;
+  }
+
+  function time() {
+    let now = new Date();
+    let year = now.getFullYear();
+    let mon = now.getMonth() + 1;
+    let day = now.getDate();
+    let h = now.getHours();
+    let hour = ('00' + h).slice(-2);
+    let m = now.getMinutes();
+    let min = ('00' + m).slice(-2);
+    let se = now.getSeconds();
+    let sec = ('00' + se).slice(-2);
+
+    let s = hour + ":" + min + ":" + sec;
+    return s;
+  }
+</script>
+
+</html>
