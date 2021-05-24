@@ -1,62 +1,101 @@
 <!DOCTYPE html>
 <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>-</title>
+    <meta name="theme-color" content="#17072f" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="pic/logo.svg" type="image/svg+xml" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> - </title>
-  <meta name="theme-color" content="#17072f">
-  <link rel="stylesheet" href="css/ress.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
-  <link rel="shortcut icon" href="pic/logo.svg" type="image/svg+xml">
-</head>
-
-<body>
-  <div id="bg">
-    <img src="pic/bg.svg" alt="background" />
-    <div>
-      <p id="date"></p>
-      <p id="time"></p>
+  <body>
+    <div id="bg">
+      <div id="info">
+        <p id="date"></p>
+        <p id="time"></p>
+      </div>
+      <div id="particles-js"></div>
+      <img src="pic/bg.svg" alt="background" />
     </div>
-  </div>
-</body>
-<script type="text/javascript">
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script type="text/javascript">
+    document.querySelector("#date").innerHTML = date();
+    document.querySelector("#time").innerHTML = time();
 
-  document.querySelector("#date").innerHTML = date();
-  document.querySelector("#time").innerHTML = time();
+    const timerID = setInterval(() => {
+      document.getElementById("time").innerHTML = time();
+    }, 1000);
 
-  let timerID = setInterval('clock()', 1000);
+    function date() {
+      const now = new Date();
+      return `${now.getMonth() + 1}/${now.getDate()}, ${now.getFullYear()}`;
+    }
 
-  function clock() {
-    document.getElementById("time").innerHTML = time();
-  }
-
-  function date() {
-    let now = new Date();
-    let year = now.getFullYear();
-    let mon = now.getMonth() + 1;
-    let day = now.getDate();
-
-    let s = " " + mon + "/" + day + ", " + year + " ";
-    return s;
-  }
-
-  function time() {
-    let now = new Date();
-    let year = now.getFullYear();
-    let mon = now.getMonth() + 1;
-    let day = now.getDate();
-    let h = now.getHours();
-    let hour = ('00' + h).slice(-2);
-    let m = now.getMinutes();
-    let min = ('00' + m).slice(-2);
-    let se = now.getSeconds();
-    let sec = ('00' + se).slice(-2);
-
-    let s = hour + ":" + min + ":" + sec;
-    return s;
-  }
-</script>
-
+    function time() {
+      const now = new Date();
+      return `${("00" + now.getHours()).slice(-2)}:${(
+        "00" + now.getMinutes()
+      ).slice(-2)}:${("00" + now.getSeconds()).slice(-2)}`;
+    }
+    particlesJS("particles-js", {
+      particles: {
+        number: {
+          value: 15,
+        },
+        color: {
+          value: ["#fffafa", "#b0c4de", "#ffe4e1", "#ffffe0", "#b0e0e6"],
+        },
+        shape: {
+          type: "edge",
+        },
+        opacity: {
+          value: 0.8,
+          random: true,
+        },
+        size: {
+          value: 5,
+          random: true,
+        },
+        line_linked: {
+          enable: false,
+        },
+        move: {
+          enable: true,
+          speed: 5,
+          direction: "bottom-right",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: false,
+        },
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: false,
+          },
+          onclick: {
+            enable: true,
+            mode: "push",
+          },
+          resize: true,
+        },
+        modes: {
+          push: {
+            particles_nb: 3,
+          },
+        },
+      },
+      retina_detect: true,
+    });
+  </script>
 </html>
